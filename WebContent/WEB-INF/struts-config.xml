@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+ "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="AddContactValidationForm"
+			type="org.lip6.struts.actionForm.AddContactValidationForm" />
+		<form-bean name="ReadContactValidationForm"
+			type="org.lip6.struts.actionForm.ReadContactValidationForm" />
+		<form-bean name="SeeContactValidationForm"
+			type="org.lip6.struts.actionForm.SeeContactValidationForm" />
+		<form-bean name="DeleteContactValidationForm"
+			type="org.lip6.struts.actionForm.DeleteContactValidationForm" />
+		<form-bean name="UpdateContactValidationForm"
+			type="org.lip6.struts.actionForm.UpdateContactValidationForm" />
+	</form-beans>
+	<action-mappings>
+
+		<action path="/ContactCreation" forward="/pages/addContact.jsp" />
+
+		<action path="/AddContact"
+			type="org.lip6.struts.servletAction.AddContactAction"
+			name="AddContactValidationForm" scope="session"
+			input="/pages/addContact.jsp">
+			<forward name="success" path="/ContactRead.do" />
+			<forward name="error" path="/pages/error.jsp" />
+		</action>
+
+		<action path="/DeleteContact"
+			name="DeleteContactValidationForm"
+			type="org.lip6.struts.servletAction.DeleteContactAction"
+			scope="request">
+			<forward name="success" path="/ContactRead.do" />
+		</action>
+
+		<action path="/SeeDetails" name="SeeContactValidationForm"
+			type="org.lip6.struts.servletAction.SeeContactAction" scope="request">
+			<forward name="success" path="/pages/afficherDetails.jsp" />
+			<forward name="error" path="/pages/error.jsp"></forward>
+		</action>
+
+		<action path="/ContactRead" name="ReadContactValidationForm"
+			type="org.lip6.struts.servletAction.ReadContactAction">
+			<forward name="success" path="/pages/afficherListe.jsp"
+				redirect="true" />
+		</action>
+
+		<action path="/ContactReadOffice"
+			name="ReadContactOfficeValidationForm"
+			type="org.lip6.struts.servletAction.ReadContactOfficeAction">
+			<forward name="success" path="/pages/afficherListeOffice.jsp"
+				redirect="true" />
+		</action>
+
+		<action path="/ContactReadFriends"
+			name="ReadContactFriendsValidationForm"
+			type="org.lip6.struts.servletAction.ReadContactFriendsAction">
+			<forward name="success"
+				path="/pages/afficherListeFriends.jsp" redirect="true" />
+		</action>
+
+		<action path="/ContactReadFamily"
+			name="ReadContactFamilyValidationForm"
+			type="org.lip6.struts.servletAction.ReadContactFamilyAction">
+			<forward name="success" path="/pages/afficherListeFamily.jsp"
+				redirect="true" />
+		</action>
+
+
+		<action path="/ReadContact" name="ReadContactValidationForm"
+			type="org.lip6.struts.servletAction.ReadContactAction">
+			<forward name="success" path="/pages/afficherListe.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+		</action>
+
+		<action path="/ContactUpdate"
+			type="org.lip6.struts.servletAction.UpdateContactAction"
+			name="UpdateContactValidationForm" scope="session">
+			<forward name="success" path="/ContactRead.do" />
+		</action>
+		<action path="/UpdateContact"
+			type="org.lip6.struts.servletAction.UpdateContactAction"
+			name="UpdateContactValidationForm" scope="session">
+			<forward name="success" path="/pages/updateContact.jsp" />
+			<forward name="error" path="/pages/error.jsp" />
+		</action>
+	</action-mappings>
+	<!-- ========== Ressources de definitions de messages =========================== -->
+	<message-resources parameter="Resources" />
+</struts-config>	
